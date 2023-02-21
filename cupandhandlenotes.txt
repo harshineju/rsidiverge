@@ -1,0 +1,9 @@
+take last hundred candles
+take first 30 candles find the high(mark it as A)
+check whether high is crossed with 1%fluctuation 
+if not crossed check high from candle high to 70th candle
+if second high is nearer to 1% fluctuation(mark it as C) and find the low between the postions(mark it as B)
+if difference between point A and B is min 3%
+find the low from point C to end of the candles(mark it as point D)
+difference between the point C and D should be less than 50% of the difference from point A and B
+if all conditions are satisfied then it is a valid cup and handle

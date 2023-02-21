@@ -1,0 +1,7 @@
+python-binance
+flask
+TA-Lib
+pandas
+numpy
+websocket_client
+flask-cors
