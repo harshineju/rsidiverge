@@ -1,0 +1,409 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" />
+    </head>
+
+    <body>
+        <h2>{{ title }}</h2>
+        <div class="parent">
+            <div class="child1">
+                <a href="/patterns">PATTERN SCANNER</a>  <a href="/rsiCrossing">RSI CROSSING</a>  <a href="/cupAndHandle">CUP AND HANDLE</a>
+                <form>
+                    <select name="timef">
+                        <option value="">SELECT TIMEFRAME</option>
+                        <option value="5">5 MINUTES</option>
+                        <option value="15">15 MINUTES</option>
+                        <option value="30">30 MINUTES</option>            
+                        <option value="60">1 HOUR</option>
+                        <option value="120">2 HOUR</option>
+                        <option value="240">4 HOUR</option>
+                        <option value="480">8 HOUR</option>
+                        <option value="1440">1 DAY</option>
+                        <option value="10080">1 WEEK</option>         
+                    </select><br>
+
+                    <input type="radio" id="bull" name="type" value="bullish" checked>
+                      <label for="bull">BULLISH DIVERGENCE</label><br>
+                    <input type="radio" id="bear" name="type" value="bearish">
+                      <label for="bear">BEARISH DIVERGENCE</label><br>
+                    <input type="submit" value="SEARCH">
+                    <button> <a href="/collectData">COLLECT DATA</a></button>
+                </form>
+            </div>
+            <div class="child2">
+                Last Modified
+                <table class="lastModifiedTable">
+                 <tr><td class="lastModifiedTableD">5 MINUTES</td><td class="lastModifiedTableD">{{ lastTime[0] }}</td></tr>
+                 <tr><td class="lastModifiedTableD">15 MINUTES</td><td class="lastModifiedTableD">{{ lastTime[1] }}</td></tr>
+                 <tr><td class="lastModifiedTableD">30 MINUTES</td><td class="lastModifiedTableD">{{ lastTime[2] }}</td></tr>
+                 <tr><td class="lastModifiedTableD">1 HOUR</td><td class="lastModifiedTableD">{{ lastTime[3] }}</td></tr>
+                 <tr><td class="lastModifiedTableD">2 HOUR</td><td class="lastModifiedTableD">{{ lastTime[4] }}</td></tr>
+                 <tr><td class="lastModifiedTableD">4 HOUR</td><td class="lastModifiedTableD">{{ lastTime[5] }}</td></tr>
+                 <tr><td class="lastModifiedTableD">8 HOUR</td><td class="lastModifiedTableD">{{ lastTime[6] }}</td></tr>
+                 <tr><td class="lastModifiedTableD">1 DAY</td><td class="lastModifiedTableD">{{ lastTime[7] }}</td></tr> 
+                 <tr><td class="lastModifiedTableD">1 WEEK</td><td class="lastModifiedTableD">{{ lastTime[8] }}</td></h6>
+                 <tr><td class="lastModifiedTableD">Bullish Result</td><td class="lastModifiedTableD">{{ lastTime[9] }}</td></h6>
+                 <tr><td class="lastModifiedTableD">Bearish Result</td><td class="lastModifiedTableD">{{ lastTime[10] }}</td></h6>
+                </table>
+            </div>
+        </div>
+
+        {% if results|count ==1 %}
+            <table>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Percent%</th>
+                    <th>Target Price</th>
+                    <th>Current Price</th>
+                </tr>
+                
+            {% for result in results %}
+                <tr>
+                    <td>
+                        {{ result[0] }}
+                    </td>
+                    <td>
+                        {{ result[1] }}
+                    </td>
+                    <td>
+                        {{ result[2] }}
+                    </td>
+                    <td>
+                        {{ result[3] }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% elif results|count>2 %}
+            <div class="parent2">
+                <div class="child1">
+                    {% if results[0]|count !=0 %}
+                        5 MINUTES
+                        <table>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Percent%</th>
+                                <th>Target Price</th>
+                                <th>Current Price</th>
+                                <th>Cross Margin</th>
+                            </tr>
+                            
+                        {% for result in results[0] %}
+                            <tr>
+                                <td>
+                                    <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=5" target="_blank">{{ result[0] }}</a>
+                                </td>
+                                <td>
+                                    {{ result[1] }}
+                                </td>
+                                <td>
+                                    {{ result[2] }}
+                                </td>
+                                <td>
+                                    {{ result[3] }}
+                                </td>
+                                <td>
+                                    {{ result[4] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% endif %}
+                    {% if results[2]|count !=0 %}
+                        30 MINUTES
+                        <table>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Percent%</th>
+                                <th>Target Price</th>
+                                <th>Current Price</th>
+                                <th>Cross Margin</th>
+                            </tr>
+                            
+                        {% for result in results[2] %}
+                            <tr>
+                                <td>
+                                    <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=30" target="_blank">{{ result[0] }}</a>
+                                </td>
+                                <td>
+                                    {{ result[1] }}
+                                </td>
+                                <td>
+                                    {{ result[2] }}
+                                </td>
+                                <td>
+                                    {{ result[3] }}
+                                </td>
+                                <td>
+                                    {{ result[4] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% endif %}
+                    
+                    {% if results[4]|count !=0 %}
+                        2 HOURS
+                        <table>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Percent%</th>
+                                <th>Target Price</th>
+                                <th>Current Price</th>
+                                <th>Cross Margin</th>
+                            </tr>
+                            
+                        {% for result in results[4] %}
+                            <tr>
+                                <td>
+                                    <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=2H" target="_blank">{{ result[0] }}</a>
+                                </td>
+                                <td>
+                                    {{ result[1] }}
+                                </td>
+                                <td>
+                                    {{ result[2] }}
+                                </td>
+                                <td>
+                                    {{ result[3] }}
+                                </td>
+                                <td>
+                                    {{ result[4] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% endif %}
+
+                    {% if results[6]|count !=0 %}
+                        8 HOURS
+                        <table>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Percent%</th>
+                                <th>Target Price</th>
+                                <th>Current Price</th>
+                                <th>Cross Margin</th>
+                            </tr>
+                            
+                        {% for result in results[6] %}
+                            <tr>
+                                <td>
+                                    {{ result[0] }}
+                                </td>
+                                <td>
+                                    {{ result[1] }}
+                                </td>
+                                <td>
+                                    {{ result[2] }}
+                                </td>
+                                <td>
+                                    {{ result[3] }}
+                                </td>
+                                <td>
+                                    {{ result[4] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% endif %}
+
+                    {% if results[8]|count !=0 %}
+                        WEEKLY
+                        <table>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Percent%</th>
+                                <th>Target Price</th>
+                                <th>Current Price</th>
+                                <th>Cross Margin</th>
+                            </tr>
+                            
+                        {% for result in results[8] %}
+                            <tr>
+                                <td>
+                                    <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=1W" target="_blank">{{ result[0] }}</a>
+                                </td>
+                                <td>
+                                    {{ result[1] }}
+                                </td>
+                                <td>
+                                    {{ result[2] }}
+                                </td>
+                                <td>
+                                    {{ result[3] }}
+                                </td>
+                                <td>
+                                    {{ result[4] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% endif %}
+                {% endif %}
+                </div>
+
+                <div class="child2">
+                    {% if results|count ==1 %}
+                        <table>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Percent%</th>
+                                <th>Target Price</th>
+                                <th>Current Price</th>
+                            </tr>
+                            
+                        {% for result in results %}
+                            <tr>
+                                <td>
+                                    {{ result[0] }}
+                                </td>
+                                <td>
+                                    {{ result[1] }}
+                                </td>
+                                <td>
+                                    {{ result[2] }}
+                                </td>
+                                <td>
+                                    {{ result[3] }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    {% elif results|count>2 %}
+                    
+                        {% if results[1]|count !=0 %}
+                            15 MINUTES
+                            <table>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Percent%</th>
+                                    <th>Target Price</th>
+                                    <th>Current Price</th>
+                                    <th>Cross Margin</th>
+                                </tr>
+                                
+                            {% for result in results[1] %}
+                                <tr>
+                                    <td>
+                                        <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=15" target="_blank">{{ result[0] }}</a>
+                                    </td>
+                                    <td>
+                                        {{ result[1] }}
+                                    </td>
+                                    <td>
+                                        {{ result[2] }}
+                                    </td>
+                                    <td>
+                                        {{ result[3] }}
+                                    </td>
+                                    <td>
+                                        {{ result[4] }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        {% endif %}
+                        {% if results[3]|count !=0 %}
+                            1 HOUR
+                            <table>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Percent%</th>
+                                    <th>Target Price</th>
+                                    <th>Current Price</th>
+                                    <th>Cross Margin</th>
+                                </tr>
+                                
+                            {% for result in results[3] %}
+                                <tr>
+                                    <td>
+                                        <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=1H" target="_blank">{{ result[0] }}</a>
+                                    </td>
+                                    <td>
+                                        {{ result[1] }}
+                                    </td>
+                                    <td>
+                                        {{ result[2] }}
+                                    </td>
+                                    <td>
+                                        {{ result[3] }}
+                                    </td>
+                                    <td>
+                                        {{ result[4] }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        {% endif %}
+                        
+                        {% if results[5]|count !=0 %}
+                            4 HOURS
+                            <table>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Percent%</th>
+                                    <th>Target Price</th>
+                                    <th>Current Price</th>
+                                    <th>Cross Margin</th>
+                                </tr>
+                                
+                            {% for result in results[5] %}
+                                <tr>
+                                    <td>
+                                        <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=4H" target="_blank">{{ result[0] }}</a>
+                                    </td>
+                                    <td>
+                                        {{ result[1] }}
+                                    </td>
+                                    <td>
+                                        {{ result[2] }}
+                                    </td>
+                                    <td>
+                                        {{ result[3] }}
+                                    </td>
+                                    <td>
+                                        {{ result[4] }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </table>
+                        {% endif %}
+
+                        {% if results[7]|count !=0 %}
+                            DAILY
+                            <table>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Percent%</th>
+                                    <th>Target Price</th>
+                                    <th>Current Price</th>
+                                    <th>Cross Margin</th>
+                                </tr>
+                                
+                            {% for result in results[7] %}
+                                <tr>
+                                    <td>
+                                        <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=1D" target="_blank">{{ result[0] }}</a>
+                                    </td>
+                                    <td>
+                                        {{ result[1] }}
+                                    </td>
+                                    <td>
+                                        {{ result[2] }}
+                                    </td>
+                                    <td>
+                                        {{ result[3] }}
+                                    </td>
+                                    <td>
+                                        {{ result[4] }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                {% endif %}
+            </div> 
+        </div>
+    </body>
+</html>

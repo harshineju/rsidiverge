@@ -1,0 +1,218 @@
+<html>
+    <head>
+        <title>RSI CROSSING</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" />
+    </head>
+
+    <bodys>
+        <h2>{{ title }}</h2>
+        
+        <div class="parent">
+            <div class="child1">
+                <form>      
+                    <input type="text" name="crossValue">
+                    <input type="radio" id="bull" name="type" value="bullish" checked>
+                      <label for="bull">BULLISH DIVERGENCE</label><br>
+                    <input type="radio" id="bear" name="type" value="bearish">
+                      <label for="bear">BEARISH DIVERGENCE</label><br>
+                    <input type="submit" value="SEARCH">
+                    <button> <a href="/collectData">COLLECT DATA</a></button>
+                </form>
+            </div>
+            <div class="child2">
+                Last Modified
+                <table class="lastModifiedTable">
+                 <tr><td class="lastModifiedTable">5 MINUTES</td><td class="lastModifiedTable">{{ lastTime[0] }}</td></tr>
+                 <tr><td class="lastModifiedTable">15 MINUTES</td><td class="lastModifiedTable">{{ lastTime[1] }}</td></tr>
+                 <tr><td class="lastModifiedTable">30 MINUTES</td><td class="lastModifiedTable">{{ lastTime[2] }}</td></tr>
+                 <tr><td class="lastModifiedTable">1 HOUR</td><td class="lastModifiedTable">{{ lastTime[3] }}</td></tr>
+                 <tr><td class="lastModifiedTable">2 HOUR</td><td class="lastModifiedTable">{{ lastTime[4] }}</td></tr>
+                 <tr><td class="lastModifiedTable">4 HOUR</td><td class="lastModifiedTable">{{ lastTime[5] }}</td></tr>
+                 <tr><td class="lastModifiedTable">8 HOUR</td><td class="lastModifiedTable">{{ lastTime[6] }}</td></tr>
+                 <tr><td class="lastModifiedTable">1 DAY</td><td class="lastModifiedTable">{{ lastTime[7] }}</td></tr>
+                 <tr><td class="lastModifiedTable">1 WEEK</td><td class="lastModifiedTable">{{ lastTime[8] }}</td></h6>
+                </table>
+            </div>
+        </div>
+
+        {% if results|count>1 %}
+        <div class="parent2">
+            <div class="child1">
+                5 MINUTES
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[0] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=5" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+                
+                30 MINUTES
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[2] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=30" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+
+                2 HOURS
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[4] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=2H" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+
+                8 HOURS
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[6] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=5" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+        
+                WEEKLY
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[8] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=1W" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+            <div class="child2">
+                15 MINUTES
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[1] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=15" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+                
+                1 HOUR
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[3] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=1H" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+    
+                4 HOURS
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[5] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=4H" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+    
+                DAILY
+                <table>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Current Price%</th>
+                    </tr>
+                    
+                {% for result in results[7] %}
+                    <tr>
+                        <td>
+                            <a href="https://www.tradingview.com/chart/?symbol=BINANCE:{{ result[0] }}&interval=1D" target="_blank">{{ result[0] }}</a>
+                        </td>
+                        <td>
+                            {{ result[1] }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+            {% endif %}
+            </div> 
+        </div>
+    </body>
+</html>

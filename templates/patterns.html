@@ -1,0 +1,50 @@
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}" />
+</head>
+<body>
+    <h1>Ashok Scanner</h1>
+    <form>
+        <select name="pattern">
+            <option value="">-- Select a Pattern --</option>
+            {% for key in candlestick_patterns %}
+                <option value="{{ key }}" {% if pattern == key %}selected="selected"{% endif %}>{{ candlestick_patterns[key] }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="timef" required>
+            <option value="">SELECT TIMEFRAME</option>
+            <option value="5">5 MINUTES</option>
+            <option value="15">15 MINUTES</option>
+            <option value="30">30 MINUTES</option>            
+            <option value="60">1 HOUR</option>
+            <option value="120">2 HOUR</option>
+            <option value="240">4 HOUR</option>
+            <option value="480">8 HOUR</option>
+            <option value="1440">1 DAY</option>
+            <option value="10080">1 WEEK</option>         
+        </select><br>
+
+        <input type="submit" value="Scan" />
+    </form>
+
+    <table>
+        <tr>
+            <th>SYMBOL</th>
+            <th>SIGNAL</th>
+        </tr>
+        {% for stock in stocks %}
+            {% if stocks[stock][pattern] %}
+            <tr>
+                <td>
+                    {{ stock }}
+                </td>
+                <td class="{{ stocks[stock][pattern] }}">
+                    {{ stocks[stock][pattern]}}
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+</body>
+</html>

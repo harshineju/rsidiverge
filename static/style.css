@@ -1,0 +1,103 @@
+body {
+  padding: 25px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+}
+
+table, th{
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid rgb(255, 255, 255);
+    width: 150px;
+    border-collapse: collapse;
+}
+
+.lastModifiedTable{
+    width: 100%;
+    border: 0px;
+    border-collapse: collapse;
+}
+
+.lastModifiedTableD{
+    width: 50%;
+    border: 0px;
+    border-collapse: collapse;
+}
+
+select {
+    width: 30%;
+    padding: 14px 15px;
+    border: none;
+    border-radius: 4px;
+    background: rgb(28, 27, 25);
+    color:antiquewhite;
+    margin: 20px 0px;
+    font-size: 15spx;
+}
+
+.bullish { background: green; color: white; }
+.bearish { background: red; color: white; }
+
+option {
+    margin: 30px;
+    background: rgb(28, 27, 25);
+    color:antiquewhite;
+    font-size: 15px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+} 
+
+input[type=submit]{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 25px 0px;
+    width: 150px;
+    height: 50px;
+}
+
+h6{
+    color:white
+}
+
+.parent{
+    width: 100%;
+}
+
+.child1{
+    float: left;
+    width: 50%;
+}
+
+.child2{
+    float:right;
+    width: 50%;
+}
+
+button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 0px;
+    width: 150px;
+    height: 50px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
